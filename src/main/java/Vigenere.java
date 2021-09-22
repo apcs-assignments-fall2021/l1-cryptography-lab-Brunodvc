@@ -1,14 +1,64 @@
 import java.util.Scanner;
 
 public class Vigenere {
+    public static char encryptCaesarLetter(char ch, int key) {
+        String str = ""+ch;
+        String encrypted_char = Caesar.encryptCaesarKey(str, key);
+
+        return encrypted_char.charAt(0);
+    }
+
+    public static char decryptCaesarLetter(char ch, int key) {
+        String str = ""+ch;
+        String decrypted_char = Caesar.decryptCaesarKey(str, key);
+
+        return decrypted_char.charAt(0);
+    }
     public static String encryptVigenere(String message, String key) {
-        return message;
-        // REPLACE THIS WITH YOUR CODE
+        String new_message = "";
+        int keyIndex = 0;
+
+        for (int i = 0; i<message.length(); i++) {
+            char ch = message.charAt(i);
+            if ((ch<'A' || (ch>'Z' && ch<'a'))||((ch<'a' && ch>'Z') || ch>'z')){
+                new_message += ch;
+            }
+            else {
+                if (keyIndex == key.length()) {
+                    keyIndex = 0;
+                }
+
+                char ch_of_message = message.charAt(i);
+                int shift = (char) (key.charAt(keyIndex)) - 65;
+                new_message += encryptCaesarLetter(ch_of_message, shift);
+                keyIndex++;
+            }
+        }
+        return new_message;
+
     }
 
     public static String decryptVigenere(String message, String key) {
-        return message;
-        // REPLACE THIS WITH YOUR CODE
+        String new_message = "";
+        int keyIndex = 0;
+
+        for (int i = 0; i<message.length(); i++) {
+            char ch = message.charAt(i);
+            if ((ch<'A' || (ch>'Z'&& ch < 'a' ))||((ch<'a' && ch>'z') || ch>'z')){
+                new_message += ch;
+            }
+            else {
+                if (keyIndex == key.length()) {
+                    keyIndex = 0;
+                }
+
+                char ch_of_message = message.charAt(i);
+                int shift = (char) (key.charAt(keyIndex)) - 65;
+                new_message += decryptCaesarLetter(ch_of_message, shift);
+                keyIndex++;
+            }
+        }
+        return new_message;
     }
 
 
