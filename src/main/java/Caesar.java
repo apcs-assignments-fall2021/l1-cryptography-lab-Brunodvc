@@ -92,7 +92,7 @@ public class Caesar {
             for (int i = 0; i < message.length(); i++) {
                 char ch = message.charAt(i);
                 //this is the turn around part
-                if ((ch >= 'A' && ch <= 'A' + key) || ch >= 'a' && ch <= 'a' + key) {
+                if ((ch >= 'A' && ch < 'A' + key) || ch >= 'a' && ch < 'a' + key) {
                     total += (char) (ch + gofurther);
                     //this is the normal decryption method
                 } else if (ch >= 'A' && ch <= 'Z' || ch >= 'a' && ch <= 'z') {
